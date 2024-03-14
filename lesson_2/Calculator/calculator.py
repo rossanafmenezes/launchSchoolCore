@@ -9,8 +9,8 @@ def invalid_number(number_str):
     try:
         int(number_str)
     except ValueError:
-        return True 
-    return False  
+        return True
+    return False
 
 # promp function
 def prompt(message):
@@ -32,7 +32,11 @@ number2 = input()
 
 print(f'You entered {number1} and {number2}')
 
-print("What operation would you like to perform? \n1) Add 2) Subtract 3) Multiply 4) Divide")
+print("""
+      What operation would you 
+      like to perform? \n1) Add 2) Subtract 3) Multiply 4) Divide
+      """
+      )
 operation = input()
 
 while operation not in ["1", "2", "3", "4"]:
@@ -54,4 +58,3 @@ match operation:
         print(f"The result is {result}")
     case _:
         print("Invalid operation")
-

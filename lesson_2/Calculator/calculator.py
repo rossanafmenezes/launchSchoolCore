@@ -30,6 +30,10 @@ while invalid_number(number1):
 prompt("What's the second number?")
 number2 = input()
 
+while invalid_number(number2):
+    prompt('Hummmmm... this does not look right. Please enter a valid number')
+    number2 = input()
+
 print(f'You entered {number1} and {number2}')
 
 print("""

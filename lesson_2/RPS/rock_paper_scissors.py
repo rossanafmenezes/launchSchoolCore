@@ -1,50 +1,59 @@
 import random
 
-
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
 
-
 def winner(player_choice, computer_choice):
-    if ((player_choice == "rock" and computer_choice == "scissors") or
-        (player_choice == "spock" and computer_choice == "rock") or
-        (player_choice == "paper" and computer_choice == "spock") or
-        (player_choice == "lizard" and computer_choice == "paper") or
-        (player_choice == "scissors" and computer_choice == "lizard") or
-        (player_choice == "spock" and computer_choice == "scissors") or
-        (player_choice == "lizard" and computer_choice == "spock") or
-        (player_choice == "rock" and computer_choice == "lizard") or
-        (player_choice == "paper" and computer_choice == "rock") or
-        (player_choice == "scissors" and computer_choice == "paper")):
-        prompt("You win!")
-    elif player_choice == computer_choice :
-        prompt("It's a tie!")
+    win_conditions = {
+        'rock': ['scissors', 'lizard'],
+        'paper': ['rock', 'spock'],
+        'scissors': ['paper', 'lizard'],
+        'lizard': ['spock', 'paper'],
+        'spock': ['scissors', 'rock']
+    }
+
+    if player_choice == computer_choice:
+        return "It's a tie!"
+
+    if computer_choice in win_conditions[player_choice]:
+        return 'You win!'
     else:
-        prompt("Computer Wins")
+        return 'Computer Wins!'
 
 def prompt(message):
     print(f'==> {message}')
 
+prompt('Welcome to RSP! Please make your choice:')
+
+computer_score = 0
+player_score = 0
+
 while True:
-    prompt('Welcome to RSP! Please make your choice:')
-    prompt(f'{", ".join(VALID_CHOICES)}')
+    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
     choice = input().lower()
 
     while choice not in VALID_CHOICES:
-        prompt('This is not a valid option. Try again')
-        choice = input()
+        prompt("That's not a valid choice")
+        choice = input().lower()
 
     computer_choice = random.choice(VALID_CHOICES)
 
+    result = winner(choice, computer_choice)
+
     prompt(f'You chose: {choice}, the Computer chose: {computer_choice}')
-    winner(choice, computer_choice)
+    print(result)
 
-    prompt('Would you like to play again (y/n)?')
-    answer = input().lower()
-    while True: 
-        if answer.startswith('n') or answer.startswith('y'):
-            break
+    if result == 'Computer Wins!':
+        computer_score += 1
+    elif result == 'You win!':
+        player_score += 1
 
-        prompt("Please enter 'y' or 'n'. ")
-        answer = input().lower()
-    if answer[0] == 'n':
+    prompt(
+        f'The current score is: You {player_score} x {computer_score} Computer'
+        )
+
+    if computer_score == 3:
+        prompt('GGWP! But the computer won!!')
+        break
+    if player_score == 3:
+        prompt('GGWP! You are the big winner!!')
         break

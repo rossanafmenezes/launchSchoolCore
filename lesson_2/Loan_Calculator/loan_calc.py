@@ -9,34 +9,34 @@ def invalid_number(number_str):
         return True
     return False
 
-def message(message, lang='en'):
+def messages(message, lang='en'):
     return MESSAGES[lang][message]
 
 with open('messages.json', 'r') as file:
     MESSAGES = json.load(file)
 
-print(message('welcome'))
+print(messages('welcome'))
 print('<----------------->')
 
-print(message('loan_amount'))
+print(messages('loan_amount'))
 loan_amount = input()
 while invalid_number(loan_amount):
     print('Please enter a valid number. Amount must be greater than 0')
     loan_amount = input()
 
 
-print(message('interest_rate'))
+print(messages('interest_rate'))
 interest_rate = input()
 while invalid_number(interest_rate):
     print('Please enter a valid number. Rate must be greater than 0')
     interest_rate = input()
 
 
-print(message('loan_duration'))
+print(messages('loan_duration'))
 loan_duration = input()
 while invalid_number(loan_duration):
     print('Please enter a valid number. Duration must be greater than 0')
-    loan_duration = input()    
+    loan_duration = input()
 
 amount_float = float(loan_amount)
 annual_rate = float(interest_rate) / 100
@@ -48,4 +48,4 @@ monthly_payment = amount_float * (
             (1 - (1 + monthly_rate) ** (-duration_months))
     )
 
-print(message('result') + f'{monthly_payment:.2f}')
+print(messages('result') + f'{monthly_payment:.2f}')

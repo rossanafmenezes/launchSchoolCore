@@ -166,16 +166,220 @@ A
 
 '''
 
-def running_total(my_list):
-    new_list = []
-    sum = 0
-    for num in my_list:
-        sum += num
-        new_list.append(sum)
-    return new_list
+# def running_total(my_list):
+#     new_list = []
+#     sum = 0
+#     for num in my_list:
+#         sum += num
+#         new_list.append(sum)
+#     return new_list
 
-print(running_total([2, 5, 13]) == [2, 7, 20])    # True
-print(running_total([14, 11, 7, 15, 20])
-      == [14, 25, 32, 47, 67])                    # True
-print(running_total([3]) == [3])                  # True
-print(running_total([]) == [])                    # True
+# print(running_total([2, 5, 13]) == [2, 7, 20])    # True
+# print(running_total([14, 11, 7, 15, 20])
+#       == [14, 25, 32, 47, 67])                    # True
+# print(running_total([3]) == [3])                  # True
+# print(running_total([]) == [])                    # True
+
+
+'''
+P
+Given a string that can have zero or more space separated words, return a 
+dictionay that counts the words based on word lenght. 
+
+E
+string = 'Four score and seven.'
+print(word_sizes(string) == {4: 1, 5: 1, 3: 1, 6: 1})
+
+string = 'Hey diddle diddle, the cat and the fiddle!'
+print(word_sizes(string) == {3: 5, 6: 1, 7: 2})
+
+string = 'Humpty Dumpty sat on a wall'
+print(word_sizes(string) == {6: 2, 3: 1, 2: 1, 1: 1, 4: 1})
+
+string = "What's up doc?"
+print(word_sizes(string) == {6: 1, 2: 1, 4: 1})
+
+print(word_sizes('') == {})
+
+D
+List
+Dictionary
+
+A
+Given a string, split the string into a list with all the word, then loop through the list
+getting the length for each word. If the length is already part of the dictionary, increase
+the count for that length. If not, add a new key-value pair where the length is the key and the count
+of 1 is the value. 
+
+- initiate an empty dict
+- initiate a list that holds each separate word of the string being passed into the
+function as the argument
+- loop through the list
+- for every word in the list, add the word length to a key of the dict and the counter + 1 to the value
+return the dict
+
+'''
+
+# def word_sizes(string):
+#     word_size ={}
+#     word_list = string.split()
+#     for word in word_list:
+#         size = len(word)
+#         if size not in word_size:
+#             word_size[size] = 0
+#         word_size[size] += 1
+
+#     return word_size
+
+
+# string = 'Four score and seven.'
+# print(word_sizes(string) == {4: 1, 5: 1, 3: 1, 6: 1})
+
+# string = 'Hey diddle diddle, the cat and the fiddle!'
+# print(word_sizes(string) == {3: 5, 6: 1, 7: 2})
+
+# string = 'Humpty Dumpty sat on a wall'
+# print(word_sizes(string) == {6: 2, 3: 1, 2: 1, 1: 1, 4: 1})
+
+# string = "What's up doc?"
+# print(word_sizes(string) == {6: 1, 2: 1, 4: 1})
+
+# print(word_sizes('') == {})
+
+#5
+
+'''
+Same as before but remove non-letter characters
+'''
+
+# def word_sizes(string):
+#     word_size ={}
+#     word_list = string.split()
+#     for word in word_list:
+#         word = letters_only(word)
+#         size = len(word)
+#         if size not in word_size:
+#             word_size[size] = 0
+#         word_size[size] += 1
+
+#     return word_size
+
+# def letters_only(string):
+#     char_list = []
+#     new_string = ""
+#     for c in string:
+#         if c.isalpha():
+#             char_list.append(c)
+#     new_string = "".join(char_list)
+#     return new_string
+
+# string = "What's up doc?"
+# print(word_sizes(string)) == {6: 1, 2: 1, 4: 1}
+
+
+'''
+P 
+Given a string, create a function that will swap the first and the last letter of
+each word in the string, so hello becomes oellh. 
+
+input: string
+output: string with swaped letters
+
+E
+
+print(swap('Oh what a wonderful day it is')
+      == "hO thaw a londerfuw yad ti si")  # True
+print(swap('Abcde') == "ebcdA")            # True
+print(swap('a') == "a")                    # True
+
+D
+List - hold words in the string
+String - return the new string with first and last chars swaped
+
+A
+Loop through each word of a given string, swap the first and last letter of each word, 
+return the new string
+
+initiate a list that will contain the words of the string as separate elements
+loop through the list of words
+initiate a new empty list
+for every word, swap the first and last charaters
+apend the new word to the new list
+join the words in the new list into a new string
+return a new string
+'''
+
+#6 
+
+# def swap(string):
+#     words = string.split()
+#     new_words = []
+#     for word in words:
+#         if len(word) == 1:
+#             new_words.append(word)
+#         else:
+#             new_words.append(word[-1] + word[1:-1] + word[0])
+#     return ' '.join(new_words)
+
+
+
+# print(swap('Oh what a wonderful day it is')
+#       == "hO thaw a londerfuw yad ti si")  # True
+# print(swap('Abcde') == "ebcdA")            # True
+# print(swap('a') == "a")                    # True
+# print(swap('Oh what a wonderful day it is'))
+
+
+'''
+P
+Take a string of numeric digits and turn into integers
+
+input: string
+output: Integer
+
+- All numbers are positive
+- all character in the string are numeric
+- there will be no empty strings
+- built-in Python functions cannot be used
+
+E
+
+print(string_to_integer("4321") == 4321)  # True
+print(string_to_integer("570") == 570)    # True
+
+D
+
+Lists
+
+A
+
+
+'''
+
+def string_to_integer(string):
+    int_dict = {
+        "0" : 0,
+        "1" : 1, 
+        "2" : 2,
+        "3" : 3, 
+        "4" : 4, 
+        "5" : 5, 
+        "6" : 6, 
+        "7" : 7, 
+        "8" : 8, 
+        "9" : 9, 
+    }
+
+    # rev_string = string[::-1]
+    # multiplier = 1
+    new_int = 0
+    for c in string:
+        new_int = (10 * new_int) + int_dict[c] 
+        # new_int += number
+        # multiplier *= 10
+
+    return new_int
+
+
+print(string_to_integer("4321") == 4321)  # True
+print(string_to_integer("570") == 570)    # True

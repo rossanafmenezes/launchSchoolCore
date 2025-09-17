@@ -356,30 +356,179 @@ A
 
 '''
 
-def string_to_integer(string):
-    int_dict = {
-        "0" : 0,
-        "1" : 1, 
-        "2" : 2,
-        "3" : 3, 
-        "4" : 4, 
-        "5" : 5, 
-        "6" : 6, 
-        "7" : 7, 
-        "8" : 8, 
-        "9" : 9, 
-    }
+#7
 
-    # rev_string = string[::-1]
-    # multiplier = 1
-    new_int = 0
-    for c in string:
-        new_int = (10 * new_int) + int_dict[c] 
-        # new_int += number
-        # multiplier *= 10
+# def string_to_integer(string):
+#     int_dict = {
+#         "0" : 0,
+#         "1" : 1, 
+#         "2" : 2,
+#         "3" : 3, 
+#         "4" : 4, 
+#         "5" : 5, 
+#         "6" : 6, 
+#         "7" : 7, 
+#         "8" : 8, 
+#         "9" : 9, 
+#     }
 
-    return new_int
+#     rev_string = string[::-1]
+#     multiplier = 1
+#     new_int = 0
+#     for c in rev_string:
+#         number = int_dict[c] * multiplier
+#         new_int += number
+#         multiplier *= 10
+
+#     return new_int
+
+# def string_to_integer(string):
+#     int_dict = {
+#         "0" : 0,
+#         "1" : 1, 
+#         "2" : 2,
+#         "3" : 3, 
+#         "4" : 4, 
+#         "5" : 5, 
+#         "6" : 6, 
+#         "7" : 7, 
+#         "8" : 8, 
+#         "9" : 9, 
+#     }
+
+#     new_int = 0
+#     for c in string:
+#         new_int = (10 * new_int) + int_dict[c]
+
+#     return new_int
 
 
-print(string_to_integer("4321") == 4321)  # True
-print(string_to_integer("570") == 570)    # True
+# print(string_to_integer("4321") == 4321)  # True
+# print(string_to_integer("570") == 570)    # True
+
+
+# def string_to_signed_integer(string):
+#     int_dict = {
+#         "-" : 0,
+#         "+" : 0,
+#         "0" : 0,
+#         "1" : 1, 
+#         "2" : 2,
+#         "3" : 3, 
+#         "4" : 4, 
+#         "5" : 5, 
+#         "6" : 6, 
+#         "7" : 7, 
+#         "8" : 8, 
+#         "9" : 9, 
+#     }
+
+#     new_int = 0
+#     for c in string:
+#         new_int = (10 * new_int) + int_dict[c]
+    
+#     if string[0] == '-':
+#         new_int *= -1
+
+#     return new_int
+
+# print(string_to_signed_integer("4321") == 4321)  # True
+# print(string_to_signed_integer("-570") == -570)  # True
+# print(string_to_signed_integer("+100") == 100)   # True
+
+''' 
+P
+Take an integer and convert it to a string
+
+input: Integer
+output: String
+
+- All numbers are positive
+- there will be no negative numbers
+- built-in Python functions cannot be used
+
+E
+
+print(integer_to_string(4321) == "4321")              # True
+print(integer_to_string(0) == "0")                    # True
+print(integer_to_string(5000) == "5000")              # True
+print(integer_to_string(1234567890) == "1234567890")  # True
+
+D
+
+Dictionary
+
+A
+
+'''
+
+# def integer_to_string(number):
+#     new_string = ""
+#     string_dict = {
+#         0 : "0",
+#         1 : "1", 
+#         2 : "2",
+#         3 : "3", 
+#         4 : "4", 
+#         5 : "5", 
+#         6 : "6", 
+#         7 : "7", 
+#         8 : "8", 
+#         9 : "9", 
+#     }
+
+#     if number == 0:
+#         new_string = string_dict[0]
+#     else:
+#         while number > 0:
+#             digit = number % 10
+#             new_string = string_dict[digit] + new_string
+#             number //= 10
+#     return new_string    
+
+    
+
+
+# print(integer_to_string(4321) == "4321")              # True
+# print(integer_to_string(0) == "0")                    # True
+# print(integer_to_string(5000) == "5000")              # True
+# print(integer_to_string(1234567890) == "1234567890")  # True
+
+''' 
+P
+Take a signed integer and convert it to a string
+
+input: Integer
+output: String
+
+- Numbers are positive or negative
+- built-in Python functions cannot be used
+
+E
+
+print(integer_to_string(4321) == "4321")              # True
+print(integer_to_string(0) == "0")                    # True
+print(integer_to_string(5000) == "5000")              # True
+print(integer_to_string(1234567890) == "1234567890")  # True
+
+D
+
+Dictionary
+
+A
+
+'''
+
+# def signed_integer_to_string(number):
+#     new_string = ""
+#     if number > 0:
+#         new_string = '+' + integer_to_string(number)
+#     elif number < 0:
+#         new_string = '-' + integer_to_string(-number)
+#     return new_string if new_string else '0'
+
+
+# print(signed_integer_to_string(4321) == "+4321")  # True
+# print(signed_integer_to_string(-123) == "-123")   # True
+# print(signed_integer_to_string(0) == "0")         # True
+

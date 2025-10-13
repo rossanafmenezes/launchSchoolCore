@@ -4,7 +4,7 @@ import os
 INITIAL_MARKER = ' '
 HUMAN_MARKER = 'X'
 COMPUTER_MARKER = 'O'
-WIN_MATCH = 5
+GAMES_TO_WIN = 5
 
 def prompt(message):
     print(f"=> {message}")
@@ -83,36 +83,48 @@ def detect_winner(board):
 
     return None
 
-def play_tic_tac_toe():
-
+def play_single_game():
+    board = initialize_board()
     while True:
-        board = initialize_board()
-
-        while True:
-            display_board(board)
-
-            player_chooses_square(board)
-            if someone_won(board) or board_full(board):
-                break
-
-            computer_chooses_square(board)
-            if someone_won(board) or board_full(board):
-                break
-
         display_board(board)
-
-        if someone_won(board):
-            prompt(f"{detect_winner(board)} won!")
-        else:
-            prompt("It's a tie!")
-
-        prompt("Play again? (y or n)")
-        answer = input().lower()
-
-        if answer[0] != 'y':
+        player_chooses_square(board)
+        if someone_won(board) or board_full(board):
+            display_board(board)
             break
-    prompt('Thanks for playing Tic Tac Toe!')
+        computer_chooses_square(board)
+        if someone_won(board) or board_full(board):
+            display_board(board)
+            break
+    return detect_winner(board)  # 'Player', 'Computer', or None
 
+def play_match():
+    scores = {'Player': 0, 'Computer': 0}
+
+    while scores['Player'] < GAMES_TO_WIN and scores['Computer'] < GAMES_TO_WIN:
+        winner = play_single_game()
+        if winner:
+            scores[winner] += 1
+
+        prompt(f"Score - Player: {scores['Player']}, Computer: {scores['Computer']}")
+
+        # If nobody has won the match yet, ask to continue the match
+        if scores['Player'] < GAMES_TO_WIN and scores['Computer'] < GAMES_TO_WIN:
+            prompt("Play another game in this match? (y/n)")
+            ans = input().strip().lower()
+            if ans != 'y':
+                break
+
+    # Match over or user stopped early
+    if scores['Player'] == GAMES_TO_WIN or scores['Computer'] == GAMES_TO_WIN:
+        prompt(f"{'Player' if scores['Player'] == GAMES_TO_WIN else 'Computer'} wins the match!")
+
+def play_tic_tac_toe():
+    while True:
+        play_match()  # scores reset here for a new match
+        prompt("Start a new match? (y/n)")
+        ans = input().strip().lower()
+        if ans != 'y':
+            break
 
 play_tic_tac_toe()
 

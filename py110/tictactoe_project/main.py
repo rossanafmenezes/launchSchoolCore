@@ -5,6 +5,11 @@ INITIAL_MARKER = ' '
 HUMAN_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 GAMES_TO_WIN = 5
+WINNING_LINES = [
+        [1, 2, 3], [4, 5, 6], [7, 8, 9],  # rows
+        [1, 4, 7], [2, 5, 8], [3, 6, 9],  # columns
+        [1, 5, 9], [3, 5, 7]              # diagonals
+    ]
 
 def prompt(message):
     print(f"=> {message}")
@@ -33,11 +38,16 @@ def initialize_board():
 def empty_squares(board):
     return [key for key, value in board.items() if value == INITIAL_MARKER]
 
-def join_or(lst, delimiter, joining_word):
-    new_string = ""
-    for item in range(1,len(lst)):
-        new_string += f"{item}{delimiter} "
-    return f"{new_string}{joining_word} {lst[-1]}"
+def join_or(sequence, delimiter=', ', word='or'):
+    length = len(sequence)
+    if length == 0:
+        return ''
+    if length == 1:
+        return str(sequence[0])
+    if length == 2:
+        return f"{sequence[0]} {word} {sequence[1]}"
+    leading = delimiter.join(str(item) for item in sequence[:-1])
+    return f"{leading}{delimiter}{word} {sequence[-1]}"
 
 def player_chooses_square(board):
     while True:
@@ -51,10 +61,31 @@ def player_chooses_square(board):
 
     board[int(square)] = HUMAN_MARKER
 
+def find_square(line, board, marker):
+    markers_in_line = [board[square] for square in line]
+
+    if markers_in_line.count(marker) == 2:
+        for square in line:
+            if board[square] == INITIAL_MARKER:
+                return square
+    return None
+
 def computer_chooses_square(board):
-    if len(empty_squares(board)) == 0:
-        return
-    square = random.choice(empty_squares(board))
+    square = None
+
+    for line in WINNING_LINES:
+        square = find_square(line, board, COMPUTER_MARKER)
+        if square:
+            break
+
+    if not square:
+        for line in WINNING_LINES:
+            square = find_square(line, board, HUMAN_MARKER)
+            if square:
+                break
+    if not square:
+        square = random.choice(empty_squares(board))
+
     board[square] = COMPUTER_MARKER
 
 def board_full(board):
@@ -64,13 +95,7 @@ def someone_won(board):
     return bool(detect_winner(board))
 
 def detect_winner(board):
-    winning_lines = [
-        [1, 2, 3], [4, 5, 6], [7, 8, 9],  # rows
-        [1, 4, 7], [2, 5, 8], [3, 6, 9],  # columns
-        [1, 5, 9], [3, 5, 7]              # diagonals
-    ]
-
-    for line in winning_lines:
+    for line in WINNING_LINES:
         sq1, sq2, sq3 = line
         if (board[sq1] == HUMAN_MARKER
                and board[sq2] == HUMAN_MARKER
